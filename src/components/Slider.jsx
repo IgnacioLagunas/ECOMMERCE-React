@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { sliderItems } from "../data";
 import ChevronLeftOutlinedIcon from "@mui/icons-material/ChevronLeftOutlined";
@@ -15,21 +15,28 @@ const Arrow = styled.div`
   width: 55px;
   height: 55px;
   border-radius: 50%;
-  background-color: gray;
+  background-color: transparent;
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
   top: 0;
   bottom: 0;
+  left: ${({ direction }) => direction === "left" && "10px"};
+  right: ${({ direction }) => direction === "right" && "10px"};
   margin: auto;
   opacity: 0.5;
   color: black;
+  z-index: 2;
+  cursor: pointer;
 `;
 
 const Wrapper = styled.div`
   height: 100%;
   display: flex;
+  position: relative;
+  transform: translateX(${({ slideIndex }) => slideIndex * -100}vw);
+  transition: all 1s ease;
 `;
 
 const Slide = styled.div`
@@ -68,15 +75,26 @@ const Button = styled.button`
   padding: 15px;
   background-color: white;
   border: solid black 2px;
+  cursor: pointer;
 `;
 
 function Slider() {
+  const [slideIndex, setSlideIndex] = useState(0);
+
+  const moveSlider = (direction) => {
+    if (direction === "right") {
+      setSlideIndex(slideIndex < sliderItems.length - 1 ? slideIndex + 1 : 0);
+    } else {
+      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
+    }
+  };
+
   return (
     <Container>
-      <Arrow>
+      <Arrow direction="left" onClick={() => moveSlider("left")}>
         <ChevronLeftOutlinedIcon />
       </Arrow>
-      <Wrapper>
+      <Wrapper slideIndex={slideIndex}>
         {sliderItems.map((item) => (
           <Slide bg={item.bg} key={item.id}>
             <ImageContainer>
@@ -90,7 +108,7 @@ function Slider() {
           </Slide>
         ))}
       </Wrapper>
-      <Arrow>
+      <Arrow direction="right" onClick={() => moveSlider("right")}>
         <ChevronRightOutlinedIcon />
       </Arrow>
     </Container>
