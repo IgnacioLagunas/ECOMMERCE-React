@@ -8,6 +8,9 @@ const Container = styled.div`
   height: 70vh;
   position: relative;
 `;
+
+
+
 const Image = styled.img`
   width: 100%;
   height: 100%;
@@ -36,9 +39,11 @@ const Button = styled.button`
   color: gray;
   border: none;
   cursor: pointer;
+  
 `;
 
 const CategoriesItem = ({ item }) => {
+
   return (
     <Container>
       <Image src={item.img} />
