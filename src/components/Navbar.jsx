@@ -2,11 +2,19 @@ import { Search } from "@mui/icons-material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import Badge from "@mui/material/Badge";
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
   height: 80px;
   border-bottom: solid gray 1px;
+
+  a{
+    text-decoration: none;
+    &:visited{
+      color: black;
+    }
+  }
 `;
 
 const Wrapper = styled.div`
@@ -28,6 +36,7 @@ const NavItem = styled.p`
   margin-right: 2em;
   text-transform: uppercase;
   cursor: pointer;
+  
 `;
 
 const Left = styled.div`
@@ -75,10 +84,10 @@ const Navbar = () => {
             </i>
           </SearchContainer>
         </Left>
-        <Center>LAMA.</Center>
+        <Center><Link to="/">LAMA.</Link></Center>
         <Right>
-          <NavItem>register</NavItem>
-          <NavItem>sign in</NavItem>
+          <NavItem><Link to="/register">register</Link></NavItem>
+          <NavItem><Link to="/login">sign in</Link></NavItem>
           <NavItem>
             <Badge badgeContent={4} color="primary">
               <ShoppingCartOutlinedIcon style={{ fontSize: 30 }} />

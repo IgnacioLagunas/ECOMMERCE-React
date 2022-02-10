@@ -1,6 +1,8 @@
 import { FavoriteBorderOutlined, SearchOutlined, ShoppingCartOutlined } from '@material-ui/icons'
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from "react-router-dom";
+
 
 const Container = styled.div`
     flex: 0;
@@ -42,6 +44,13 @@ const Info = styled.div`
     &:hover{
       opacity: 1;
     }
+
+    a{
+    text-decoration: none;
+      &:visited{
+        color: black;
+      }
+    }
     
 `
 const Icon= styled.div`
@@ -69,9 +78,11 @@ const Product = ({item}) => {
       <Circle/>
       <Image src={item.img}/>
       <Info>
-        <Icon><ShoppingCartOutlined/></Icon>
-        <Icon><SearchOutlined/></Icon>
-        <Icon><FavoriteBorderOutlined/> </Icon>
+        <Link to="/product">
+          <Icon><ShoppingCartOutlined/></Icon>
+        </Link>
+        <Link to="/product"><Icon><SearchOutlined/></Icon>  </Link>
+        <Link to="/product"><Icon><FavoriteBorderOutlined/> </Icon>  </Link>
 
       </Info>
     </Container>
